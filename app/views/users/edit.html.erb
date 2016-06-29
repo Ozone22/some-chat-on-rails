@@ -1,0 +1,33 @@
+<% provide(:title, 'Edit') %>
+<div class="row">
+  <%= render 'layouts/user_sidebar' %>
+  <div class="col-xs-6 col-xs-offset-1">
+    <h1>Edit profile</h1>
+    <%= form_for(@user) do |f| %>
+
+        <%= render 'shared/error_messages' %>
+
+        <%= f.label :login %>
+        <%= f.text_field :login %>
+
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+
+        <%= f.label :password_confirmation, "Confirmation" %>
+        <%= f.password_field :password_confirmation %>
+
+        <%= f.label :avatar %>
+        <div class="col-xs-6">
+          <%= image_tag(@user.avatar.url(:original), alt: @user.login) %>
+        </div>
+        <div class="cols-xs-6">
+          <%= f.file_field :avatar, :"data-filename-placement"=>"inside" %>
+        </div>
+
+        <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

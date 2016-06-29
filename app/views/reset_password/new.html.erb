@@ -1,0 +1,17 @@
+<% provide(:title, "Password Reset") %>
+<h1>Password reset</h1>
+
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+
+    <%= form_tag(reset_password_index_path, method: :post) do %>
+
+        <%= label_tag(:email, "Email") %>
+        <%= text_field_tag(:email) %>
+
+        <%= submit_tag("Reset password", class: "btn btn-large btn-primary") %>
+
+    <% end %>
+
+  </div>
+</div>

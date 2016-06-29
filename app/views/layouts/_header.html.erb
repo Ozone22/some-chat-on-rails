@@ -1,0 +1,23 @@
+<header class="navbar  navbar-fixed-top navbar-default">
+    <div class="container">
+        <% if signed_in? %>
+          <div class="navbar-header">
+            <%= link_to "Some_Chat", current_user , id: 'logo' %>
+          </div>
+          <ul class="nav pull-right navbar-nav">
+            <li class="active"><%= link_to "Home", current_user %></li>
+            <li><%= link_to "Users", users_path %></li>
+            <li><%= link_to "Help", help_path %></li>
+            <li><%= link_to "Sign out", signout_path, method: :delete %></li>
+          </ul>
+        <% else %>
+          <div class="navbar-header">
+              <%= link_to "Some_Chat", root_path , id: 'logo' %>
+          </div>
+            <ul class="nav pull-right navbar-nav">
+              <li class="active"><%= link_to "Sign in", root_path %></li>
+              <li><%= link_to "Help", help_path %></li>
+            </ul>
+        <% end %>
+  </div>
+</header>
