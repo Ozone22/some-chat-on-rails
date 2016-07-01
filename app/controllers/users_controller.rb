@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
 
+  before_action :signed_in_user, only: [:edit, :update, :index, :destroy]
+  before_action :correct_user, only: [:edit, :update]
+  before_action :admin_user, only: [:destroy]
+
   def new
     @user = User.new
   end
 
   def show
     @user = User.find_by(id: params[:id])
+  end
+
+  def index
+    @users = User.paginate(page: params[:page], per_page: 20)
   end
 
   def create
@@ -50,10 +58,38 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    User.find_by(id: params[:id]).destroy
+    flash[:success] = 'User destroyed'
+    redirect_to users_path
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:login, :email, :password, :password_confirmation, :avatar)
+  end
+
+  #Before filter
+
+  def signed_in_user
+    unless signed_in?
+      flash[:warning] = 'Please sign in first'
+      store_location
+      redirect_to signin_url
+    end
+  end
+
+  def admin_user
+    redirect_to root_url unless current_user.admin?
+  end
+
+  def correct_user
+    @user = User.find_by(id: params[:id])
+    unless current_user?(@user)
+      flash[:warning] = 'Access denied'
+      redirect_to current_user
+    end
   end
 
 end

@@ -26,7 +26,7 @@ class ResetPasswordController < ApplicationController
 
   def update
     @user = User.find_by_password_reset_token(params[:id])
-    if @user.password_reset_send_at < 6.hours.ago
+    if @user.password_reset_send_at < 2.hours.ago
       flash[:warning] = 'Reset has expired. Please resend email'
       redirect_to new_reset_password_path
     elsif @user.update_attributes(user_params)

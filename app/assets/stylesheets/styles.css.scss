@@ -139,6 +139,25 @@ input {
   margin-left: 140px;
 }
 
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid lightslategrey;
+    a {
+      margin-left: 2%;
+    }
+    .delete_user_link {
+      color:lightslategrey;
+    }
+    &:last-child {
+      border-bottom: 1px solid lightslategrey;
+    }
+  }
+}
+
 /* footer */
 
 footer {

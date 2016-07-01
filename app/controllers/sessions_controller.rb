@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       if user.email_confirmed
         sign_in user
-        redirect_to user
+        redirect_back_or user
       else
         flash.now[:warning] = 'Please activate your account first'
         render 'new'

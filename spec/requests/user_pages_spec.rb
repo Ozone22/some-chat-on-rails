@@ -91,8 +91,7 @@ describe 'User pages' do
   end
 
   describe 'Confirmed user' do
-    let(:user) { FactoryGirl.create(:user, email_confirmed: true) }
-
+    let(:user) { FactoryGirl.create(:confirmed_user) }
     before { sign_in(user) }
 
     describe 'Show page' do
@@ -129,6 +128,46 @@ describe 'User pages' do
         specify { expect(user.reload.email).to eq(new_email.downcase) }
 
       end
+    end
+
+    describe 'index' do
+      before { visit users_path }
+
+      it { should have_title('Users') }
+
+      describe 'pagination' do
+        before(:all) { 20.times { FactoryGirl.create(:confirmed_user) } }
+        after(:all) { User.delete_all }
+
+        it { should have_selector('div.pagination') }
+      end
+    end
+  end
+
+  describe 'delete links' do
+    let(:user) { FactoryGirl.create(:confirmed_user) }
+    before do
+      sign_in user
+      visit users_path
+    end
+
+    it { should_not have_link('delete') }
+
+    describe 'as admin' do
+      let(:admin) { FactoryGirl.create(:admin) }
+      before do
+        sign_in admin
+        visit users_path
+      end
+
+      it { should have_link('delete',href: user_path(User.first)) }
+      it 'should delete another user by click' do
+        expect do
+          click_link('delete', match: :first)
+        end.to change(User, :count).by(-1)
+      end
+
+      it { should_not have_link('delete', href: user_path(admin)) }
     end
   end
 end

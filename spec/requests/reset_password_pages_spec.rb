@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Reset Password' do
 
-  let(:user) { FactoryGirl.create(:user, email_confirmed: true) }
+  let(:user) { FactoryGirl.create(:confirmed_user) }
   subject { page }
 
   describe 'create reset password page' do
