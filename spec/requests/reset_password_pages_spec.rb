@@ -64,7 +64,7 @@ describe 'Reset Password' do
 
     before do
       user.send_password_reset
-      visit new_pass_path(user.password_reset_token)
+      visit edit_reset_password_url(user.password_reset_token)
     end
 
     it { should have_title('Password Reset') }

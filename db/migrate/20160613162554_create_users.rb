@@ -4,7 +4,6 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
 
       t.string :email, :null => false
-      t.string :avatar_path
       t.string :login, :null => false
       t.boolean :is_online
       t.integer :unread_message_count

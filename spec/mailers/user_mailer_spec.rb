@@ -29,7 +29,7 @@ describe "UserMailer" do
 
     it 'assigns @password_reset_url' do
       expect(mail.body.encoded)
-          .to match(new_pass_url(user.password_reset_token))
+          .to match(edit_reset_password_url(user.password_reset_token))
     end
   end
 

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :signed_in_user, only: [:edit, :update, :index, :destroy]
+  before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy]
 
@@ -31,12 +31,11 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
+  # Before update, we delete old avatar from server
   def update
     @user = User.find_by(id: params[:id])
-    # remove the old avatar file from server
-    unless params[:avatar].blank?
-      @user.remove_avatar
-    end
+
+    @user.remove_avatar unless params[:avatar].blank?
 
     if @user.update_attributes(user_params)
       flash[:success] = 'Profile successfully updated!'
@@ -70,7 +69,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:login, :email, :password, :password_confirmation, :avatar)
   end
 
-  #Before filter
+  # Before filter
 
   def signed_in_user
     unless signed_in?
@@ -81,7 +80,7 @@ class UsersController < ApplicationController
   end
 
   def admin_user
-    redirect_to root_url unless current_user.admin?
+    redirect_to current_user unless current_user.admin?
   end
 
   def correct_user

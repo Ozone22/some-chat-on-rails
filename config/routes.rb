@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   root 'sessions#new'
 
   resources :users do
@@ -10,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :sessions, only: [:new, :create, :destroy]
-  resources :reset_password, only: [:new, :create, :update]
+  resources :reset_password, expect: [:destroy]
 
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new'
@@ -18,7 +17,6 @@ Rails.application.routes.draw do
 
   get '/help' => 'static_pages#help'
   get '/about' => 'static_pages#about'
-  get '/new_pass/:id' => 'reset_password#new_pass', as: 'new_pass'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

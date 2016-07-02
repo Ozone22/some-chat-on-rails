@@ -4,15 +4,10 @@ class User < ActiveRecord::Base
   before_create  :create_remember_token, :create_confirm_token
   before_destroy :remove_avatar
 
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-
-  #Pass contain at least 1 digit and 1 Capital Character
-  VALID_PASS_REGEX = /(?=^.{5,}\z)(?=.*[A-Z])(?=.*\d).*\z/
-
   validates :login, presence: true, length: { minimum: 3, maximum: 60 }
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+  validates :email, presence: true, email: true,
             uniqueness: { case_sensitive: false }
-  validates :password, length: { minimum: 6, maximum: 60 }, format: { with: VALID_PASS_REGEX }
+  validates :password, length: { minimum: 6, maximum: 60 }, password: true
 
   # Validates for user avatars
   has_attached_file :avatar, styles: { original: "220x220#", thumb: "90x90#" },
@@ -40,8 +35,8 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  # We update just few fields(without pass)
   def send_password_reset
-    # We update just few fields
     self.password_reset_token = User.encrypt(User.new_token)
     self.password_reset_send_at = Time.zone.now
     self.save!(validate: false)
@@ -55,9 +50,8 @@ class User < ActiveRecord::Base
   end
 
   def remove_avatar
-    if self.avatar.exists? && self.avatar != ENV['DEFAULT_AVATAR_PATH']
-      self.avatar.clear
-    end
+    self.avatar.clear if self.avatar.exists? &&
+        !self.avatar.eql?(ENV['DEFAULT_AVATAR_PATH'])
   end
 
   private

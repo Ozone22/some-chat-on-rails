@@ -1,6 +1,6 @@
 <% provide(:title, @user.login ) %>
 <div class = "row">
-  <%= render 'layouts/user_sidebar' %>
+  <%= render 'user_sidebar' %>
   <div class="col-md-3">
     <div class="navbar navbar-default navbar-fixed-left">
       <%= image_tag(@user.avatar.url(:original), alt: @user.login) %>

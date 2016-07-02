@@ -69,7 +69,10 @@ describe 'Authentication' do
       let(:user) { FactoryGirl.create(:confirmed_user) }
       let(:wrong_user) { FactoryGirl.create(:user, email: 'tmpUser@tmp.ru', login: 'tmpUser' ) }
 
-      before { sign_in(user) }
+      before do
+        sign_in(user)
+        p cookies[:remember_token]
+      end
 
       describe 'edit page' do
         before { visit edit_user_path(wrong_user) }
@@ -110,7 +113,7 @@ describe 'Authentication' do
         delete user_path(another_user)
       end
 
-      specify { expect(response).to redirect_to(root_url) }
+      specify { expect(response).to redirect_to(user_url(user)) }
     end
   end
 end

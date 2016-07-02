@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
   default from: 'adidasruslan@gmail.com'
 
   def password_reset(user)
-    @password_reset_url = new_pass_url(user.password_reset_token)
+    @password_reset_url = edit_reset_password_url(user.password_reset_token)
     mail(to: user.email, subject: 'Password reset on Some_Chat')
   end
 
