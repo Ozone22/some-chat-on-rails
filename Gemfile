@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-#Use postgresql as the default database
+# Use postgresql as the default database
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -25,11 +25,11 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-#Gem for work with attachment files
+# Gem for work with attachment files
 gem 'paperclip'
-#Gem for paperclip, which upload owr files to dropbox(cheap solution, instead of Amazon S3)
+# Gem for paperclip, which upload owr files to dropbox(cheap solution, instead of Amazon S3)
 gem "paperclip-dropbox"
-#Gem for pretty well work with configs
+# Gem for pretty well work with configs
 gem "figaro"
 
 gem 'bootstrap-sass'
@@ -55,7 +55,7 @@ group :development do
 end
 
 group :test do
-  #Test Fixtures-data
+  # Test Fixtures-data
   gem 'factory_girl_rails'
 
 end
@@ -70,7 +70,7 @@ group :development, :test do
 end
 
 group :production do
-  #Gem for Heroku
+  # Gem for Heroku
   gem 'rails_12factor'
 
 end
