@@ -1,0 +1,10 @@
+<div class="user_show_friends">
+  <div class="friends_count_title">
+    <%= link_to("Friends(#{@user.friends.count})", friends_user_path(@user) ) %>
+  </div>
+  <div class="user_show_avatars">
+    <% @friends.each do |friend| %>
+        <%= link_to( image_tag(friend.avatar.url(:thumb)), friend) %>
+    <% end %>
+  </div>
+</div>

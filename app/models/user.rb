@@ -1,5 +1,14 @@
 class User < ActiveRecord::Base
 
+  has_many :relationships, dependent: :destroy
+  has_many :inverted_relationships, foreign_key: 'friend_id', class_name: 'Relationship', dependent: :destroy
+  has_many :friends, -> { where(relationships: { status: Relationship.statuses[:accepted] } )},
+           through: :relationships
+  has_many :requested_friends, -> { where(relationships: { status: Relationship.statuses[:requested] } )},
+           source: :friend, through: :relationships
+  has_many :pending_friends, -> { where(relationships: { status: Relationship.statuses[:pending] } )},
+           source: :friend, through: :relationships
+
   before_save { self.email.downcase! }
   before_create  :create_remember_token, :create_confirm_token
   before_destroy :remove_avatar
@@ -52,6 +61,35 @@ class User < ActiveRecord::Base
   def remove_avatar
     self.avatar.clear if self.avatar.exists? &&
         !self.avatar.eql?(ENV['DEFAULT_AVATAR_PATH'])
+  end
+
+  def friend?(friend)
+    relationships.exists?(friend_id: friend.id)
+  end
+
+  def friends_with!(friend)
+    unless self == friend || relationships.exists?(friend_id: friend.id)
+      transaction do
+        relationships.create!(friend: friend, status: :pending)
+        inverted_relationships.create!(user: friend, status: :requested)
+      end
+    end
+  end
+
+  def accept_friendship(friend)
+    transaction do
+      one_side = relationships.find_by(friend_id: friend.id)
+      one_side.update_attribute(:status, :accepted)
+      second_side = inverted_relationships.find_by(user_id: friend.id)
+      second_side.update_attribute(:status, :accepted)
+    end
+  end
+
+  def breakup_with!(friend)
+    transaction do
+      relationships.find_by(friend_id: friend.id).destroy!
+      inverted_relationships.find_by(user_id: friend.id).destroy!
+    end
   end
 
   private

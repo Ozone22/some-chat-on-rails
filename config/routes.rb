@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :confirm_email
+      get :friends
     end
   end
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :reset_password, expect: [:destroy]
+  resources :relationships, only: [:create, :update, :destroy]
 
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new'

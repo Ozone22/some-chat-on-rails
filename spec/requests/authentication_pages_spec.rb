@@ -69,10 +69,7 @@ describe 'Authentication' do
       let(:user) { FactoryGirl.create(:confirmed_user) }
       let(:wrong_user) { FactoryGirl.create(:user, email: 'tmpUser@tmp.ru', login: 'tmpUser' ) }
 
-      before do
-        sign_in(user)
-        p cookies[:remember_token]
-      end
+      before { sign_in(user) }
 
       describe 'edit page' do
         before { visit edit_user_path(wrong_user) }
@@ -114,6 +111,17 @@ describe 'Authentication' do
       end
 
       specify { expect(response).to redirect_to(user_url(user)) }
+    end
+
+    describe 'Signed in signin page redirect' do
+      let(:user) { FactoryGirl.create(:confirmed_user) }
+
+      before do
+        sign_in user
+        visit signin_path
+      end
+
+      it { should have_title(user.login) }
     end
   end
 end

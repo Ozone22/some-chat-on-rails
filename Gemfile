@@ -49,6 +49,7 @@ group :development do
 
   #Gems for testing
   gem 'rspec-rails'
+  gem 'rspec-its'
   gem 'selenium-webdriver'
   gem 'capybara'
 

@@ -12,8 +12,8 @@ html {
   overflow-y: scroll;
 }
 
-body {
-  padding-top: 60px;
+.navbar {
+  width: 100%;
 }
 
 section {
@@ -119,7 +119,6 @@ input {
   height: 100%;
   img {
     width: 100%;
-    margin: 10px 10px 1% 1%;
     margin: auto;
   }
 }
@@ -139,6 +138,49 @@ input {
   margin-left: 140px;
 }
 
+.friend_type_panel {
+  padding: 2%;
+  padding-bottom: 4%;
+  width: 95%;
+  margin-left: 5%;
+  margin-bottom: 2%;
+  background-color: #d5e8ff;
+  a {
+    color: #555;
+  }
+}
+
+.user_login_show{
+  font-size: 2em;
+  line-height: 2em;
+}
+
+.user_show_friends {
+  .friends_count_title {
+    padding: 5%;
+    border-radius: 2px;
+    background-color: #f8f8f8;
+    width: 100%;
+    a {
+      font-size: 1.2em;
+      color: lightslategrey;
+    }
+  }
+  .user_show_avatars {
+    width: 95%;
+    display: block;
+    margin-top: 5%;
+    padding-left: 5%;
+    img {
+      width: 49%;
+      margin-bottom: 5px;
+    }
+  }
+  display: block;
+  min-height: 250px;
+  width: 100%;
+}
+
 .users {
   list-style: none;
   margin: 0;
@@ -154,6 +196,19 @@ input {
     }
     &:last-child {
       border-bottom: 1px solid lightslategrey;
+    }
+    .user_list_block {
+      width: 20%;
+      height: auto;
+      float: right;
+      color: lightslategrey;
+      .user_list_link {
+        padding: 3% 20%;
+        width: 98%;
+      }
+      .list_button {
+        margin-top: 5%;
+      }
     }
   }
 }

@@ -10,3 +10,14 @@ def sign_in(user, options = {})
     click_button 'Sign in'
   end
 end
+
+def sign_out(user, options = {})
+  if options[:no_capybara]
+    cookies.delete(:remember_token)
+    remember_token = User.new_token
+    user.update_attribute(:remember_token, User.encrypt(remember_token))
+  else
+    visit user_path(user)
+    click_link 'Sign out'
+  end
+end

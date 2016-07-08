@@ -102,6 +102,12 @@ describe 'User pages' do
       it { should have_title(user.login) }
     end
 
+    describe 'Signed in register page redirect' do
+      before { visit signup_path }
+
+      it { should have_title(user.login) }
+    end
+
     describe 'Edit page' do
       before { visit edit_user_path(user) }
 
@@ -156,6 +162,7 @@ describe 'User pages' do
     describe 'as admin' do
       let(:admin) { FactoryGirl.create(:admin) }
       before do
+        sign_out user
         sign_in admin
         visit users_path
       end
@@ -168,6 +175,69 @@ describe 'User pages' do
       end
 
       it { should_not have_link('delete', href: user_path(admin)) }
+    end
+  end
+
+  describe 'not accepted friends pages' do
+    let(:user) { FactoryGirl.create(:confirmed_user) }
+    let(:another_user) { FactoryGirl.create(:confirmed_user)}
+    before do
+      FactoryGirl.create(:confirmed_user)
+      user.friends_with!(another_user)
+      sign_in user
+      visit users_path
+    end
+
+    after(:all) { User.delete_all }
+
+    it { should have_button('Add to a friends') }
+    it 'should add user to pending friends' do
+      expect do
+        click_button('Add to a friends', match: :first)
+      end.to change(user.pending_friends, :count).by(1)
+    end
+
+    describe 'friends pending pages' do
+      before { visit friends_user_path(id: user.id, status: 'pending') }
+
+      it { should have_link(another_user.login) }
+      it { should have_link('Remove') }
+    end
+
+    describe 'friends requested pages' do
+      before do
+        sign_out user
+        sign_in another_user
+        visit friends_user_path(id: another_user.id, status: 'requested')
+      end
+
+      it { should have_link(user.login, href: user_path(user)) }
+      it { should have_link('Remove') }
+      it 'should add user to accepted friends' do
+        expect do
+          click_button('Accept', match: :first)
+        end.to change(another_user.friends, :count).by(1)
+      end
+    end
+  end
+
+  describe 'accepted friends pages' do
+    let(:user) { FactoryGirl.create(:confirmed_user) }
+    let(:another_user) { FactoryGirl.create(:confirmed_user) }
+
+    before do
+      user.friends_with!(another_user)
+      another_user.accept_friendship(user)
+      sign_in another_user
+      visit friends_user_path(id: another_user.id, status: 'requested')
+    end
+
+    it { should_not have_link(user.login, href: user_path(user)) }
+
+    describe 'should contain friends' do
+      before { visit friends_user_path(another_user) }
+
+      it { should have_link(user.login, href: user_path(user)) }
     end
   end
 end

@@ -4,7 +4,8 @@
   <div class="col-md-3">
     <div class="navbar navbar-default navbar-fixed-left">
       <%= image_tag(@user.avatar.url(:original), alt: @user.login) %>
-      <span class="navbar-brand"><%= @user.login %></span>
+      <span class="user_login_show"><%= @user.login %></span>
+      <%= render 'user_friends_block' %>
     </div>
   </div>
   <div class="col-md-6">

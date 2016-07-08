@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy]
+  before_action :redirect_current_user, only: [:new, :create]
 
   def new
     @user = User.new
@@ -10,6 +11,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    @friends = @user.friends.limit(4)
   end
 
   def index
@@ -57,6 +59,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def friends
+    @users = user_friends_by_status(params[:status] || 'accepted')
+  end
+
   def destroy
     User.find_by(id: params[:id]).destroy
     flash[:success] = 'User destroyed'
@@ -69,26 +75,21 @@ class UsersController < ApplicationController
     params.require(:user).permit(:login, :email, :password, :password_confirmation, :avatar)
   end
 
-  # Before filter
-
-  def signed_in_user
-    unless signed_in?
-      flash[:warning] = 'Please sign in first'
-      store_location
-      redirect_to signin_url
+  def user_friends_by_status(status)
+    user_list = User.find_by(id: params[:id])
+    if status == 'requested'
+      user_list.requested_friends.all
+    elsif status == 'pending'
+      user_list.pending_friends.all
+    else
+      user_list.friends.all
     end
   end
+
+  # Before filter
 
   def admin_user
     redirect_to current_user unless current_user.admin?
-  end
-
-  def correct_user
-    @user = User.find_by(id: params[:id])
-    unless current_user?(@user)
-      flash[:warning] = 'Access denied'
-      redirect_to current_user
-    end
   end
 
 end

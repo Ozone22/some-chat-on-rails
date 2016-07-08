@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  before_action :redirect_current_user, only: [:new, :create]
+
   def new
   end
 

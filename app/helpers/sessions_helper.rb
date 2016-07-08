@@ -38,4 +38,25 @@ module SessionsHelper
     cookies.delete(:remember_token)
     self.current_user = nil
   end
+
+  def signed_in_user
+    unless signed_in?
+      flash[:warning] = 'Please sign in first'
+      store_location
+      redirect_to signin_url
+    end
+  end
+
+  def correct_user
+    user = User.find_by(id: params[:id])
+    unless current_user?(user)
+      flash[:warning] = 'Access denied'
+      redirect_to current_user
+    end
+  end
+
+  def redirect_current_user
+    redirect_to current_user if signed_in?
+  end
+
 end
