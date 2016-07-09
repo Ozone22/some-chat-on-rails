@@ -21,3 +21,6 @@
 /config/database.yml
 .idea
 .secret
+
+# Ignore data for tests
+/spec/file_upload_test

@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
                                               access_token: ENV['ACCESS_TOKEN'],
                                               access_token_secret: ENV['ACCESS_TOKEN_SECRET'],
                                               user_id: ENV['USER_ID'],
-                                              access_type: 'app_folder'},
+                                              access_type: ENV['ACCESS_TYPE']},
                     default_url: ENV['DEFAULT_AVATAR_PATH'],
                     path: "public/system/#{ Rails.env }/:attachment/:id/:hash.:extension",
                     hash_secret: Rails.application.secrets.secret_key_base,
