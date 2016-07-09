@@ -21,7 +21,7 @@
 
         <%= f.label :avatar %>
         <div class="col-xs-6">
-          <%= image_tag(@user.avatar.url(:original), alt: @user.login) %>
+          <%= image_tag(@user.show_avatar(:original), alt: @user.login) %>
         </div>
         <div class="cols-xs-6">
           <%= f.file_field :avatar, :"data-filename-placement"=>"inside" %>

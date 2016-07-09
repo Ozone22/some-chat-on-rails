@@ -4,7 +4,7 @@
   </div>
   <div class="user_show_avatars">
     <% @friends.each do |friend| %>
-        <%= link_to( image_tag(friend.avatar.url(:thumb)), friend) %>
+        <%= link_to( image_tag(friend.show_avatar(:thumb)), friend) %>
     <% end %>
   </div>
 </div>

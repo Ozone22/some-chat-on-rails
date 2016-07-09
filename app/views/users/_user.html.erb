@@ -1,5 +1,5 @@
 <li>
-  <%= image_tag(user.avatar.url(:thumb),alt: user.login) %>
+  <%= image_tag(user.show_avatar(:thumb),alt: user.login) %>
   <%= link_to user.login, user %>
   <% if current_user.admin? && !current_user?(user) %>
     <%= link_to 'delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_user_link' %>

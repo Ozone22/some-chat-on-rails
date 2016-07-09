@@ -60,7 +60,15 @@ class User < ActiveRecord::Base
 
   def remove_avatar
     self.avatar.clear if self.avatar.exists? &&
-        !self.avatar.eql?(ENV['DEFAULT_AVATAR_PATH'])
+      !self.avatar.eql?(ENV['DEFAULT_AVATAR_PATH'])
+  end
+
+  def show_avatar(args)
+    if self.avatar.exists?
+      self.avatar.url(args)
+    else
+      "/images/#{args}/default.png"
+    end
   end
 
   def friend?(friend)
