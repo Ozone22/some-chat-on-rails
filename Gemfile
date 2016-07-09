@@ -27,11 +27,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Gem for work with attachment files
 gem 'paperclip'
-# Gem for paperclip, which upload owr files to dropbox(cheap solution, instead of Amazon S3)
-# With dropbox app work with avatars can spend too much time
-gem "paperclip-dropbox"
-# Gem for pretty well work with configs
-gem "figaro"
+# Gem for work with cloudinary CDN and upload
+gem 'paperclip-cloudinary'
+# Gem for config management
+gem 'figaro'
 
 gem 'bootstrap-sass'
 

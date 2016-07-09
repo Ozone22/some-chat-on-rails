@@ -20,15 +20,19 @@ class User < ActiveRecord::Base
 
   # Validates for user avatars
   has_attached_file :avatar, styles: { original: "220x220#", thumb: "90x90#" },
-                    storage: :dropbox,
-                    dropbox_credentials: { app_key: ENV['APP_KEY'],
-                                              app_secret: ENV['APP_SECRET'],
-                                              access_token: ENV['ACCESS_TOKEN'],
-                                              access_token_secret: ENV['ACCESS_TOKEN_SECRET'],
-                                              user_id: ENV['USER_ID'],
-                                              access_type: ENV['ACCESS_TYPE']},
+                    storage: :cloudinary,
+                    cloudinary_upload_options: {
+                      public_id: 'avatar',
+                      styles: {
+                          thumb: {
+                              transformation: [
+                                  { :crop => 'thumb', :gravity => 'face' }
+                              ]
+                          }
+                      }
+                    },
                     default_url: ENV['DEFAULT_AVATAR_PATH'],
-                    path: "public/system/#{ Rails.env }/:attachment/:id/:hash.:extension",
+                    path: "#{ Rails.env }/:attachment/:id/:hash.:extension",
                     hash_secret: Rails.application.secrets.secret_key_base,
                     size: { in: 0..500.kilobytes }
 
@@ -59,15 +63,15 @@ class User < ActiveRecord::Base
   end
 
   def remove_avatar
-    self.avatar.clear if self.avatar.exists? &&
-      !self.avatar.eql?(ENV['DEFAULT_AVATAR_PATH'])
+    self.avatar.clear unless
+      self.avatar.eql?(ENV['DEFAULT_AVATAR_PATH'])
   end
 
   def show_avatar(args)
-    if self.avatar.exists?
-      self.avatar.url(args)
-    else
+    if self.avatar.url.blank?
       default_avatar_path(args)
+    else
+      self.avatar.url(args, cloudinary: { secure: true })
     end
   end
 
