@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
     if self.avatar.exists?
       self.avatar.url(args)
     else
-      "/images/#{args}/default.png"
+      default_avatar_path(args)
     end
   end
 
@@ -110,6 +110,10 @@ class User < ActiveRecord::Base
     if self.confirm_token.blank?
       self.confirm_token = User.encrypt(User.new_token)
     end
+  end
+
+  def default_avatar_path(args)
+    "/images/#{args}/default.png"
   end
 
 end
