@@ -23,7 +23,6 @@ test:
   database: chat_test_db
 
 production:
-  <<: *default
   adapter: postgresql
   encoding: unicode
   pool: 5
