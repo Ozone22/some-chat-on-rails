@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705092818) do
+ActiveRecord::Schema.define(version: 20160711150406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer "sender_id",    null: false
+    t.integer "recipient_id", null: false
+  end
+
+  add_index "conversations", ["recipient_id"], name: "index_conversations_on_recipient_id", using: :btree
+  add_index "conversations", ["sender_id", "recipient_id"], name: "index_conversations_on_sender_id_and_recipient_id", unique: true, using: :btree
+  add_index "conversations", ["sender_id"], name: "index_conversations_on_sender_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "text",                        null: false
+    t.boolean  "is_readed",   default: false
+    t.integer  "dialog_id"
+    t.string   "dialog_type"
+    t.datetime "created_at"
+  end
+
+  add_index "messages", ["dialog_type", "dialog_id"], name: "index_messages_on_dialog_type_and_dialog_id", using: :btree
 
   create_table "relationships", force: :cascade do |t|
     t.integer "friend_id",             null: false
