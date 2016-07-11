@@ -20,7 +20,7 @@ DEFAULT_AVATAR_PATH: "/images/:style/default.png"
 
 # Gmail
 GMAIL_USERNAME: 'adidasruslan@gmail.com'
-GMAIL_PASSWORD: '17d3199f'
+GMAIL_PASSWORD: '17d3199F'
 
 # Faye settings
 SERVER: "http://localhost:9292/faye"
