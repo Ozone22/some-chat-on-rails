@@ -1,0 +1,10 @@
+development:
+  server: ENV['SERVER']
+  secret_token: ENV['SECRET']
+test:
+  server: ENV['SERVER']
+  secret_token: ENV['SECRET']
+production:
+  server: ENV['SERVER']
+  secret_token: ENV['SECRET']
+  signature_expiration: ENV['SIGNATURE_EXPIRATION']

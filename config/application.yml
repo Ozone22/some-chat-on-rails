@@ -21,3 +21,12 @@ DEFAULT_AVATAR_PATH: "/images/:style/default.png"
 # Gmail
 GMAIL_USERNAME: 'adidasruslan@gmail.com'
 GMAIL_PASSWORD: '17d3199f'
+
+# Faye settings
+SERVER: "http://localhost:9292/faye"
+SECRET_TOKEN: "secret"
+
+production:
+  SERVER: "http://example.com/faye"
+  SECRET_TOKEN: "be6c8eb6a20eea6b40433e147c2441aa5efe991e17ff1d4d220734b5bb9e8176"
+  SIGNATURE_EXPIRATION: 3600
