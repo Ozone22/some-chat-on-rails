@@ -238,6 +238,7 @@ describe 'User pages' do
       before { visit friends_user_path(another_user) }
 
       it { should have_link(user.login, href: user_path(user)) }
+      it { should have_link('Send message') }
     end
   end
 end

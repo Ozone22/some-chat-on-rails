@@ -1,0 +1,41 @@
+<% provide(:title, 'Messages') %>
+<div class = "row">
+  <%= render 'users/user_sidebar' %>
+  <div class="col-md-9">
+    <div class = "row">
+      <div class="message_overflow">
+        <ul class="messages">
+          <% if @messages.empty? %>
+            <p>No messages yet</p>
+          <% else %>
+            <%= render @messages %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class = "row">
+
+      <div class = "col-md-2">
+        <div class = "recipient_image">
+          <%= image_tag(@conversation.recipient.show_avatar(:thumb), alt: @conversation.recipient.login) %>
+        </div>
+      </div>
+
+      <%= form_for(Message.new(sender_id: current_user.id, dialog_id: @conversation.id,
+                               dialog_type: 'Conversation'), remote: true) do |f| %>
+
+        <%= f.hidden_field :sender_id %>
+        <%= f.hidden_field :dialog_id %>
+        <%= f.hidden_field :dialog_type %>
+
+        <div class="col-md-10">
+          <%= f.text_area :text, rows: 4, id: 'message_text' %>
+        </div>
+        <div class = "col-md-3 col-md-offset-9">
+          <%= f.submit "Send", class: "btn btn-info" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

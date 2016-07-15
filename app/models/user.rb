@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
            source: :friend, through: :relationships
   has_many :pending_friends, -> { where(relationships: { status: Relationship.statuses[:pending] } )},
            source: :friend, through: :relationships
+  has_many :conversations, foreign_key: 'sender_id', dependent: :destroy
+  has_many :messages, foreign_key: 'sender_id', dependent: :destroy
 
   before_save { self.email.downcase! }
   before_create  :create_remember_token, :create_confirm_token
@@ -73,6 +75,18 @@ class User < ActiveRecord::Base
     else
       self.avatar.url(args, cloudinary: { secure: true })
     end
+  end
+
+  def begin_conversation(recipient_id)
+    if Conversation.between(self.id, recipient_id).present?
+      Conversation.between(self.id, recipient_id).first
+    else
+      conversations.create!(recipient_id: recipient_id)
+    end
+  end
+
+  def show_conversations
+    Conversation.involving(self.id)
   end
 
   def friend?(friend)

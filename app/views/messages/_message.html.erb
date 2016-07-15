@@ -1,0 +1,17 @@
+<li>
+  <div class = "row">
+    <div class = "col-md-2">
+      <%= image_tag(message.sender.show_avatar(:thumb)) %>
+    </div>
+    <div class="col-md-8">
+      <span>
+        <%= message.text %>
+      </span>
+    </div>
+    <div class="col-md-2">
+      <p>
+        <%= current_time_show(message.created_at) %>
+      </p>
+    </div>
+  </div>
+</li>

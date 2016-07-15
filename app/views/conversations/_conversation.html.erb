@@ -1,0 +1,8 @@
+<li>
+  <%= image_tag(conversation.recipient.show_avatar(:thumb)) %>
+  <%= link_to conversation.recipient.login, conversation.recipient, class: 'conversation_recipient' %>
+  <div class="list_message">
+    <%= link_to conversation.last_message[0..50], conversation, class: 'conversation_last_message' %>
+  </div>
+  <%= link_to 'delete', conversation, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_user_link' %>
+</li>

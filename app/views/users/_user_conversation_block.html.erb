@@ -1,0 +1,8 @@
+<% if current_user != @user && current_user.friends.include?(@user) %>
+  <div class="user_start_conversation">
+    <%= form_for(current_user.conversations.build(recipient_id: @user.id)) do |f| %>
+        <%= f.hidden_field :recipient_id %>
+        <%= f.submit 'Begin conversation', class: 'btn btn-info' %>
+    <% end %>
+  </div>
+<% end %>
