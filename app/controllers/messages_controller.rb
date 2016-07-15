@@ -4,6 +4,8 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.create!(message_params)
+    conversation = @message.dialog
+    PrivatePub.publish_to(conversation_path(conversation), @message)
     respond_to do |format|
       format.html { redirect_to :back }
       format.js

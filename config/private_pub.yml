@@ -1,10 +1,12 @@
 development:
-  server: ENV['SERVER']
-  secret_token: ENV['SECRET']
+  server: "http://localhost:9292/faye"
+  secret_token: "secret"
+
 test:
-  server: ENV['SERVER']
-  secret_token: ENV['SECRET']
+  server: "http://localhost:9292/faye"
+  secret_token: "secret"
+
 production:
-  server: ENV['SERVER']
-  secret_token: ENV['SECRET']
-  signature_expiration: ENV['SIGNATURE_EXPIRATION']
+  server: "http://example.com/faye"
+  secret_token: "be6c8eb6a20eea6b40433e147c2441aa5efe991e17ff1d4d220734b5bb9e8176"
+  signature_expiration: 3600
