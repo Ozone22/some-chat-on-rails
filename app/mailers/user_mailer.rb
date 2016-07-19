@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
 
-  default from: 'adidasruslan@gmail.com'
+  default from: 'some.chat.rails@gmail.com'
 
   def password_reset(user)
     @password_reset_url = edit_reset_password_url(user.password_reset_token)
