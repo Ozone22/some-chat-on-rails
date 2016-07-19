@@ -11,10 +11,18 @@
           <%= link_to 'Remove', current_user.relationships.find_by(friend_id: user.id),
                       method: :delete, data: { confirm: "Really remove #{user.login} from friends?" },
                       class: 'btn btn-danger user_list_link' %>
-          <% if current_page?(friends_user_path(id: current_user.id, status: 'requested')) %>
+
+          <% if current_user.friends.include?(user) %>
+              <%= form_for(current_user.conversations.build(recipient_id: user.id)) do |f| %>
+                  <%= f.hidden_field :recipient_id %>
+                  <%= f.submit 'Send message', class: 'btn btn-default user_list_link' %>
+              <% end %>
+
+          <% elsif current_page?(friends_user_path(id: current_user.id, status: 'requested')) %>
               <%= form_for(current_user.relationships.find_by(friend_id: user.id)) do |f| %>
                 <%= f.submit 'Accept', class: 'btn btn-info list_button' %>
               <% end %>
+
           <% end %>
       <% else %>
           <%= form_for(current_user.relationships.build(friend_id: user.id)) do |f| %>

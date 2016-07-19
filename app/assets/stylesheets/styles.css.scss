@@ -154,7 +154,9 @@ input {
   font-size: 2em;
   line-height: 2em;
 }
-
+.user_start_conversation {
+  margin-bottom: 30%;
+}
 .user_show_friends {
   .friends_count_title {
     padding: 5%;
@@ -180,8 +182,72 @@ input {
   min-height: 250px;
   width: 100%;
 }
-
-.users {
+.modal_link {
+  margin: 20px 0;
+}
+.modal_link_add {
+  margin-top: -5%;
+  float: right;
+}
+.chat_name_field {
+  padding: 1px 5px;
+}
+.checkbox_form {
+  overflow-y: auto;
+  max-height: 150px;
+  .collection_check_box {
+    label {
+      display: inline;
+    }
+    input[type="checkbox"] {
+      display: inline;
+      width: 10%;
+    }
+  }
+}
+.messages {
+  min-height: 200px;
+  list-style: none;
+  text-align: left;
+  padding: 5px;
+  li {
+    padding: 10px 0;
+  }
+}
+.message_overflow {
+  overflow-y: scroll;
+  max-height: 400px;
+  overflow-x: hidden;
+  padding: 2%;
+  margin-bottom: 25px;
+}
+.new_message {
+  font-size: 0.9em;
+  margin-bottom: -100px;
+  input[type=submit] {
+    margin-top: -5%;
+  }
+}
+.recipient_image{
+  margin-left: 10%;
+  margin-right: 0;
+}
+.conversations {
+  .conversation_recipient {
+    font-size: 0.9em;
+  }
+  .list_message {
+    display: inline-block;
+    text-align: center;
+    padding: 5px;
+    width: 70%;
+    .conversation_last_message {
+      font-size: 1em;
+      color: lightslategrey;
+    }
+  }
+}
+.users, .conversations {
   list-style: none;
   margin: 0;
   li {
@@ -204,6 +270,7 @@ input {
       color: lightslategrey;
       .user_list_link {
         padding: 3% 20%;
+        margin-top: 10px;
         width: 98%;
       }
       .list_button {

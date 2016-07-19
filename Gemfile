@@ -31,6 +31,10 @@ gem 'paperclip'
 gem 'paperclip-cloudinary'
 # Gem for config management
 gem 'figaro'
+# Gem for connecting to Faye. Include Faye too
+gem 'private_pub'
+# Server,that support a Faye service
+gem 'thin'
 
 gem 'bootstrap-sass'
 

@@ -31,6 +31,8 @@ describe User do
   it { should respond_to(:friends) }
   it { should respond_to(:requested_friends) }
   it { should respond_to(:pending_friends) }
+  it { should respond_to(:conversations) }
+  it { should respond_to(:messages) }
 
   it { should be_valid }
   it { should_not be_admin }

@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Room creating</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= form_for(current_user.rooms.build) do |f| %>
+          <%= f.label :name, 'Chat name:' %>
+          <%= f.text_field :name, class: 'chat_name_field' %>
+          <div class="checkbox_form">
+            <%= f.collection_check_boxes :users, current_user.friends.all, :id, :login do |b| %>
+              <div class="collection_check_box">
+                <%= b.check_box %>
+                <%= b.label %>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-md-5 col-md-offset-7">
+            <%= f.submit 'Begin conversation', class: 'btn btn-info' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

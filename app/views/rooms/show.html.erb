@@ -1,0 +1,44 @@
+<% provide(:title, 'Messages') %>
+<div class = "row">
+  <%= render 'users/user_sidebar' %>
+  <div class="col-md-9">
+
+    <%= render 'layouts/messages_list' %>
+
+    <div class = "row">
+
+      <div class="col-md-2">
+        <div class = "recipient_image">
+          <%= image_tag(current_user.show_avatar(:thumb), alt: current_user.login) %>
+        </div>
+      </div>
+
+      <%= form_for(Message.new(sender_id: current_user.id, dialog_id: @room.id,
+                               dialog_type: 'Room'), remote: true) do |f| %>
+
+          <%= f.hidden_field :sender_id %>
+          <%= f.hidden_field :dialog_id %>
+          <%= f.hidden_field :dialog_type %>
+
+          <div class="col-md-10">
+            <%= f.text_area :text, rows: 4, id: 'message_text' %>
+          </div>
+
+          <div class="col-md-2 col-md-offset-5">
+            <%= link_to 'members', '#myModal3', class: 'btn btn-success modal_link_add', "data-toggle": 'modal' %>
+          </div>
+
+          <div class="col-md-2">
+            <%= link_to 'Add users', '#myModal2', class: 'btn btn-success modal_link_add', "data-toggle": 'modal' %>
+          </div>
+
+          <div class = "col-md-3">
+            <%= f.submit "Send", class: "btn btn-info" %>
+          </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
+<%= subscribe_to root_path(@room) %>

@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :reset_password, expect: [:destroy]
   resources :relationships, only: [:create, :update, :destroy]
+  resources :conversations, expect: [:edit, :update]
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create, :show, :destroy]
 
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new'

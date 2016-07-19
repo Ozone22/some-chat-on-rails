@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
            source: :friend, through: :relationships
   has_many :pending_friends, -> { where(relationships: { status: Relationship.statuses[:pending] } )},
            source: :friend, through: :relationships
+  has_many :conversations, foreign_key: 'sender_id', dependent: :destroy
+  has_many :messages, foreign_key: 'sender_id', dependent: :destroy
+  has_many :room_relations, class_name: 'RoomUser', dependent: :destroy
+  has_many :rooms, through: :room_relations
 
   before_save { self.email.downcase! }
   before_create  :create_remember_token, :create_confirm_token
@@ -73,6 +77,26 @@ class User < ActiveRecord::Base
     else
       self.avatar.url(args, cloudinary: { secure: true })
     end
+  end
+
+  def begin_conversation(recipient_id)
+    if Conversation.between(self.id, recipient_id).present?
+      Conversation.between(self.id, recipient_id).first
+    else
+      conversations.create!(recipient_id: recipient_id)
+    end
+  end
+
+  def begin_conference(params)
+    transaction do
+      room = params[:name].nil? ? rooms.create! : rooms.create!(name: params[:name])
+      params[:users].each { |user| room.add_interlocutor(user) }
+      room
+    end
+  end
+
+  def show_conversations
+    (Conversation.involving(self.id) << Room.involving(self.id)).flatten!
   end
 
   def friend?(friend)

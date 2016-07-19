@@ -5,6 +5,7 @@
     <div class="navbar navbar-default navbar-fixed-left">
       <%= image_tag(@user.show_avatar(:original), alt: @user.login) %>
       <span class="user_login_show"><%= @user.login %></span>
+      <%= render 'user_conversation_block' %>
       <%= render 'user_friends_block' %>
     </div>
   </div>

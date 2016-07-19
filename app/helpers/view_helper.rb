@@ -9,4 +9,8 @@ module ViewHelper
     'active' if current_page?(link_path)
   end
 
+  def default_avatar_path(args)
+    "/images/#{args}/default.png"
+  end
+
 end
