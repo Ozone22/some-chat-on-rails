@@ -17,8 +17,11 @@
 /tmp
 
 # Ignore application configuration
+/config/application.yml
+/config/database.yml
 .idea
 .secret
+/config/private_pub.yml
 
 # Ignore data for tests
 /spec/file_upload_test
