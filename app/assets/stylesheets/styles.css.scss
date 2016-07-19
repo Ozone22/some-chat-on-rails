@@ -182,6 +182,29 @@ input {
   min-height: 250px;
   width: 100%;
 }
+.modal_link {
+  margin: 20px 0;
+}
+.modal_link_add {
+  margin-top: -5%;
+  float: right;
+}
+.chat_name_field {
+  padding: 1px 5px;
+}
+.checkbox_form {
+  overflow-y: auto;
+  max-height: 150px;
+  .collection_check_box {
+    label {
+      display: inline;
+    }
+    input[type="checkbox"] {
+      display: inline;
+      width: 10%;
+    }
+  }
+}
 .messages {
   min-height: 200px;
   list-style: none;

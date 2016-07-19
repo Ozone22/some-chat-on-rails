@@ -1,7 +1,4 @@
-class ConversationsController < ApplicationController
-
-  before_action :signed_in_user
-  before_action :interlocutor, only: [:show]
+class ConversationsController < BaseChatController
 
   def create
     @conversation = current_user.begin_conversation(params[:conversation][:recipient_id])
@@ -15,6 +12,11 @@ class ConversationsController < ApplicationController
   def show
     @conversation = Conversation.find_by(id: params[:id])
     @messages = @conversation.messages.order(created_at: :asc )
+  end
+
+  def destroy
+    Conversation.find_by(id: params[:id]).destroy!
+    super
   end
 
   private

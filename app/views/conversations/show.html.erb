@@ -2,22 +2,14 @@
 <div class = "row">
   <%= render 'users/user_sidebar' %>
   <div class="col-md-9">
-    <div class = "row">
-      <div class="message_overflow">
-        <ul class="messages">
-          <% if @messages.empty? %>
-            <p>No messages yet</p>
-          <% else %>
-            <%= render @messages %>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+
+    <%= render 'layouts/messages_list' %>
+
     <div class = "row">
 
-      <div class = "col-md-2">
+      <div class="col-md-2">
         <div class = "recipient_image">
-          <%= image_tag(@conversation.recipient.show_avatar(:thumb), alt: @conversation.recipient.login) %>
+          <%= image_tag(current_user.show_avatar(:thumb), alt: current_user.login) %>
         </div>
       </div>
 

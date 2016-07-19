@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712155252) do
+ActiveRecord::Schema.define(version: 20160718090438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,19 @@ ActiveRecord::Schema.define(version: 20160712155252) do
   add_index "relationships", ["friend_id", "user_id"], name: "index_relationships_on_friend_id_and_user_id", unique: true, using: :btree
   add_index "relationships", ["friend_id"], name: "index_relationships_on_friend_id", using: :btree
   add_index "relationships", ["user_id"], name: "index_relationships_on_user_id", using: :btree
+
+  create_table "room_users", force: :cascade do |t|
+    t.integer "room_id", null: false
+    t.integer "user_id", null: false
+  end
+
+  add_index "room_users", ["room_id", "user_id"], name: "index_room_users_on_room_id_and_user_id", unique: true, using: :btree
+  add_index "room_users", ["room_id"], name: "index_room_users_on_room_id", using: :btree
+  add_index "room_users", ["user_id"], name: "index_room_users_on_user_id", using: :btree
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name", limit: 50, default: "some-room", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                                  null: false

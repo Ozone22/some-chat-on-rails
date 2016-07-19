@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require private_pub
 //= require bootstrap.file-input
+//= require bootstrap/modal
 //= require_tree .

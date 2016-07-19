@@ -1,0 +1,11 @@
+<div class = "row">
+  <div class="message_overflow">
+    <ul class="messages">
+      <% if @messages.empty? %>
+          <p>No messages yet</p>
+      <% else %>
+          <%= render @messages %>
+      <% end %>
+    </ul>
+  </div>
+</div>

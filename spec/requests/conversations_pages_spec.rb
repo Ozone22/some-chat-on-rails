@@ -30,7 +30,25 @@ describe 'Conversation pages' do
 
       it { should have_link('Hello', href: conversation_path(conversation)) }
     end
+
+    describe 'create room button' do
+      before { visit conversations_path }
+
+      it { should have_link('Create room') }
+
+      describe 'room creating modal' do
+        before do
+          click_link 'Create room'
+          fill_in 'Chat name', with: 'test-room'
+          click_button 'Begin conversation'
+        end
+
+        it { should have_content('No messages yet') }
+      end
+    end
   end
+
+
 
   describe 'User page' do
     before do

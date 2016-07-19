@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :update, :destroy]
   resources :conversations, expect: [:edit, :update]
   resources :messages, only: [:create]
+  resources :rooms, only: [:create, :show, :destroy]
 
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new'

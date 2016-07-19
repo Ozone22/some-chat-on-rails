@@ -1,5 +1,7 @@
 class Conversation < ActiveRecord::Base
 
+  include ConversationBase
+
   belongs_to :sender, class_name: 'User', foreign_key: 'sender_id'
   belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'
   has_many :messages, as: :dialog
@@ -16,10 +18,6 @@ class Conversation < ActiveRecord::Base
 
   scope :involving, -> (user_id) do
     where("conversations.sender_id = ? OR conversations.recipient_id = ?", user_id, user_id)
-  end
-
-  def last_message
-    self.messages.last ? self.messages.last.text : 'No messages yet'
   end
 
   def interlocutor?(user)
