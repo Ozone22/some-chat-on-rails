@@ -11,6 +11,8 @@ Simple (not finished yet) chat on Rails.
 * WebSocket for conversations(private_pub)
 * Code covered with tests (Rspec, FactoryGirl)
 * Database on PostgreSQL
+* Friendship (with accept, or decline)
+* Private conversation or chat with friends
 
 Project on Heroku: https://some-chat-on-rails.herokuapp.com
 
