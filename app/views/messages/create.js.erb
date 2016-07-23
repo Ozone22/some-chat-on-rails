@@ -1,2 +1,4 @@
-$(".messages").append("<%= j render(@message) %>");
-$("#message_text").val('');
+<% publish_to socket_message_route(@message) do %>
+  $(".messages").append("<%= j render(@message) %>");
+  $("#message_text").val('');
+<% end %>

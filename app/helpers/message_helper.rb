@@ -1,10 +1,10 @@
 module MessageHelper
 
-  def socket_message_publish(message)
+  def socket_message_route(message)
     if message.dialog_type == 'Conversation'
-      PrivatePub.publish_to(conversation_path(message.dialog), message)
+      conversation_path(message.dialog)
     else
-      PrivatePub.publish_to(room_path(message.dialog), message)
+      room_path(message.dialog)
     end
   end
 end
