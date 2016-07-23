@@ -14,6 +14,12 @@ Simple (not finished yet) chat on Rails.
 * Friendship (with accept, or decline)
 * Private conversation or chat with friends
 
+###Database ER:
+
+<img src="http://res.cloudinary.com/djfhtqjzs/image/upload/v1469269886/ER_ny0gww.png">
+
+Project not finished ( Online users and unread messages)
+
 Project on Heroku: https://some-chat-on-rails.herokuapp.com
 
 
