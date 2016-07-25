@@ -19,9 +19,9 @@
 # Ignore application configuration
 .idea
 .secret
-config/application.yml
-config/database.yml
-config/private_pub.yml
+#config/application.yml
+#config/database.yml
+#config/private_pub.yml
 
 # Ignore data for tests
 /spec/file_upload_test
