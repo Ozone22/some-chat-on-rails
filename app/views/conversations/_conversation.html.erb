@@ -1,8 +1,16 @@
 <li>
-  <%= image_tag(conversation.recipient.show_avatar(:thumb)) %>
-  <%= link_to conversation.recipient.login, conversation.recipient, class: 'conversation_recipient' %>
-  <div class="list_message">
-    <%= link_to conversation.last_message[0..50], conversation, class: 'conversation_last_message' %>
+  <div class ="row">
+    <div class="col-md-2">
+      <%= image_tag(conversation.recipient_show_avatar(:thumb)) %>
+    </div>
+    <div class="col-md-2">
+      <%= link_to conversation.recipient_login, conversation.recipient, class: 'conversation_recipient' %>
+    </div>
+    <div class="col-md-6">
+        <%= link_to conversation.last_message[0..50], conversation, class: 'conversation_last_message' %>
+    </div>
+    <div class="col-md-2">
+      <%= link_to 'delete', conversation, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_user_link' %>
+    </div>
   </div>
-  <%= link_to 'delete', conversation, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_user_link' %>
 </li>

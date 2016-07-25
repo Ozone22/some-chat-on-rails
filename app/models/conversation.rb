@@ -11,6 +11,9 @@ class Conversation < ActiveRecord::Base
   validates :recipient_id, presence: true
   validate :conversation_unique
 
+  delegate :login, :show_avatar, to: :recipient, prefix: true
+  delegate :login, :show_avatar, to: :sender, prefix: true
+
   scope :between, -> (recipient_id, sender_id) do
     where("(conversations.sender_id = ? AND conversations.recipient_id =?) OR (conversations.sender_id = ? AND conversations.recipient_id =?)",
           sender_id,recipient_id, recipient_id, sender_id)

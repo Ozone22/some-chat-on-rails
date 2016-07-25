@@ -13,7 +13,7 @@ describe "UserMailer" do
       end
 
       it 'renders the sender email' do
-        expect(base_mail.from).to eq(['adidasruslan@gmail.com'])
+        expect(base_mail.from).to eq(['some.chat.rails@gmail.com'])
       end
     end
   end

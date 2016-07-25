@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   def begin_conference(params)
     transaction do
       room = params[:name].nil? ? rooms.create! : rooms.create!(name: params[:name])
-      params[:users].each { |user| room.add_interlocutor(user) }
+      params[:users].each { |user| room.add_interlocutor(user) } if params[:users].present?
       room
     end
   end

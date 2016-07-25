@@ -240,7 +240,6 @@ input {
     display: inline-block;
     text-align: center;
     padding: 5px;
-    width: 70%;
     .conversation_last_message {
       font-size: 1em;
       color: lightslategrey;
@@ -251,7 +250,8 @@ input {
   list-style: none;
   margin: 0;
   li {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 10px 0;
     border-top: 1px solid lightslategrey;
     a {

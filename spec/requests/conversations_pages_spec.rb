@@ -9,6 +9,8 @@ describe 'Conversation pages' do
   let(:conversation) { user.begin_conversation(recipient.id) }
 
   before do
+    user.friends_with!(recipient)
+    recipient.accept_friendship(user)
     sign_in user
     user.begin_conversation(recipient.id)
   end
@@ -36,14 +38,27 @@ describe 'Conversation pages' do
 
       it { should have_link('Create room') }
 
-      describe 'room creating modal' do
-        before do
-          click_link 'Create room'
-          fill_in 'Chat name', with: 'test-room'
-          click_button 'Begin conversation'
+      describe 'creating modal' do
+        describe 'for yourself' do
+          before do
+            click_link 'Create room'
+            fill_in 'Chat name', with: 'test-room'
+            click_button 'Begin conversation'
+          end
+
+          it { should have_content('No messages yet') }
         end
 
-        it { should have_content('No messages yet') }
+        describe 'with friends' do
+          before do
+            click_link 'Create room'
+            fill_in 'Chat name', with: 'test-room-friends'
+            check recipient.login
+            click_button 'Begin conversation'
+          end
+
+          it { should have_content('No messages yet') }
+        end
       end
     end
   end

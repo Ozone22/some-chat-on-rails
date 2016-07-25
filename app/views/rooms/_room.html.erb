@@ -1,8 +1,16 @@
 <li>
-  <%= image_tag(default_avatar_path(:thumb)) %>
-  <%= link_to room.name, room, class: 'conversation_recipient' %>
-  <div class="list_message">
-    <%= link_to room.last_message[0..50], room, class: 'conversation_last_message' %>
+  <div class ="row">
+    <div class="col-md-2">
+      <%= image_tag(default_avatar_path(:thumb)) %>
+    </div>
+    <div class="col-md-2">
+      <%= link_to room.name, room, class: 'conversation_recipient' %>
+    </div>
+    <div class="col-md-6">
+      <%= link_to room.last_message[0..50], room, class: 'conversation_last_message' %>
+    </div>
+    <div class="col-md-2">
+      <%= link_to 'delete', room, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_user_link' %>
+    </div>
   </div>
-  <%= link_to 'delete', room, method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete_user_link' %>
 </li>
