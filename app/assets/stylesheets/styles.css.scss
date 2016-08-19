@@ -268,6 +268,12 @@ input {
   font-size: 0.9em;
 }
 
+.search-input {
+  .btn {
+    margin-top: 0;
+  }
+}
+
 .users, .conversations {
   list-style: none;
   margin: 0;

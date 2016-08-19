@@ -21,7 +21,7 @@
         <%= f.hidden_field :dialog_type %>
 
         <div class="col-md-10">
-          <%= f.text_area :text, rows: 4, id: 'message_text' %>
+          <%= f.text_area :text, rows: 4, id: 'message_text', class: "form-control" %>
         </div>
         <div class = "col-md-3 col-md-offset-9">
           <%= f.submit "Send", class: "btn btn-info" %>
@@ -29,18 +29,7 @@
 
       <% end %>
     </div>
-    <div id="link_preview" class="link_preview">
-      <div class="row">
-        <div class="col-md-2">
-          <img id="link_image">
-        </div>
-        <div class="col-md-8 col-md-offset-1">
-          <span id="link_title"></span>
-          <span id="description_link"></span>
-          <a id="link_url"></a>
-        </div>
-      </div>
-    </div>
+    <%= render 'layouts/link_preview' %>
   </div>
 </div>
 <%= subscribe_to conversation_path(@conversation) %>

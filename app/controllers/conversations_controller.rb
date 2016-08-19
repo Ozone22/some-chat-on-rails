@@ -11,8 +11,8 @@ class ConversationsController < BaseChatController
 
   def show
     @conversation = Conversation.find_by(id: params[:id])
-    @messages = @conversation.messages.order(created_at: :asc )
-    read_unread_messages(@messages.unread_messages)
+    read_unread_messages(@conversation.unread_messages)
+    @messages = get_messages_by_params(@conversation.messages)
   end
 
   def destroy

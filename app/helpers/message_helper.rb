@@ -24,6 +24,16 @@ module MessageHelper
     unread_messages.present? && unread_messages.last.sender != current_user
   end
 
+  def get_messages_by_params(messages)
+    if params[:m]
+      messages
+    elsif params[:search].present?
+      messages.search(params[:search]).order(created_at: :asc )
+    else
+      messages.order(created_at: :asc ).last(10)
+    end
+  end
+
   def message_time(datetime)
     local_time = datetime.localtime
     if local_time < DateTime.now.to_date

@@ -15,4 +15,12 @@ class Message < ActiveRecord::Base
     update_all(is_readed: true)
   end
 
+  scope :search, -> (search) do
+    if search
+      where("text LIKE ?", "%#{search}%")
+    else
+      all
+    end
+  end
+
 end
