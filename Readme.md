@@ -1,16 +1,18 @@
 ##Chat on Rails
 
-Simple (not finished yet) chat on Rails. 
+Chat (not finished yet) on Rails. 
 
 ###Chat with:
 
 * Registration(without any gems, like Devise)
 * Email confirmation
 * Forgot password(like email confirmation)
+* Link preview (facebook, vk like - using Ajax and Nokogiri)
 * Using CDN for images(cloudinary)
-* WebSocket for conversations(private_pub)
+* WebSocket for conversations and rooms(private_pub - Faye)
 * Code covered with tests (Rspec, FactoryGirl)
 * Database on PostgreSQL
+* Message searching
 * Friendship (with accept, or decline)
 * Private conversation or chat with friends
 
