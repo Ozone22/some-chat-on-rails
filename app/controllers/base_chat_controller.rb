@@ -12,6 +12,15 @@ class BaseChatController < ApplicationController
     redirect_to conversations_path
   end
 
+  def html_parse
+    @data = HtmlParser.parse(params[:url]).to_json
+    @message = Message.find_by(id: params[:id]) if params[:id].present?
+    respond_to do |format|
+      format.js
+      format.json { render json: @data }
+    end
+  end
+
   protected
 
   def interlocutor

@@ -16,4 +16,6 @@
 //= require private_pub
 //= require bootstrap.file-input
 //= require bootstrap/modal
+//= require js-routes
+//= require message/link_preview.js.erb
 //= require_tree .

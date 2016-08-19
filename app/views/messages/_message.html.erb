@@ -3,10 +3,9 @@
     <div class = "col-md-2">
       <%= image_tag(message.sender_show_avatar(:thumb)) %>
     </div>
-    <div class="col-md-8">
-      <span>
-        <%= message.text %>
-      </span>
+    <div id = "<%= message.id %>" class="col-md-8">
+      <script type="text/javascript"> render_preview("<%= message.text.html_safe %>", "<%= message.id %>") </script>
+      <span id="<%= message.id %>message"></span>
     </div>
     <div class="col-md-2">
       <p>

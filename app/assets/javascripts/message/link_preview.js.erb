@@ -1,0 +1,55 @@
+function fill_preview_block(data, id) {
+  if (id === undefined) {
+    id = "";
+  }
+  $("#link_preview" + id).css('display','block')
+      .find("#link_title").text(data['title']);
+  $("#link_preview" + id).find("#link_image").attr('src', data['image_url']);
+  $("#link_preview" + id).find("#description_link").text(data['description']);
+  $("#link_preview" + id).find("#link_url").attr('href', data['url']).text(data['url']);
+}
+
+function render_preview(message, message_id) {
+  $(document).ready(function (e) {
+    if (message.indexOf("http") !== -1) {
+      // get Rails route
+      var route = Routes.htmlparse_path();
+      $.ajax(route, {
+        type: 'POST',
+        data: {url: message, id: message_id },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log(textStatus, errorThrown);
+        }
+      });
+    } else {
+      $("#" + message_id + "message").text(message);
+    }
+  });
+}
+
+
+$(document).ready(function (e) {
+  $("#message_text").bind('paste', function(e) {
+    var el = $(this);
+    setTimeout(function() {
+      var text = $(el).val();
+
+      // some link check
+
+      if(text.indexOf("http") !== -1) {
+
+        // get Rails route
+        var route = Routes.htmlparse_path();
+
+        $.ajax(route, {
+          dataType: 'json',
+          type: 'POST',
+          data: {url: text},
+          success: function (data, status, xhr) {
+            fill_preview_block(data);
+          }
+        });
+      }
+    }, 100);
+  });
+});

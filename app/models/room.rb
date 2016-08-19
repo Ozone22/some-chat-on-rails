@@ -6,6 +6,8 @@ class Room < ActiveRecord::Base
   has_many :users, through: :room_users
   has_many :messages, as: :dialog
 
+  delegate :unread_messages, to: :messages
+
   scope :involving, ->(user_id) do
     joins(:room_users).where("user_id = ?", user_id)
   end

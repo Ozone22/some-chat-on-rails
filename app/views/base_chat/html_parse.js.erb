@@ -1,0 +1,8 @@
+<% publish_to socket_message_route(@message) do %>
+  var message_id = <%= @message.id %>;
+  var div_block = $("#link_preview").clone()
+      .prop('id','link_preview' + message_id)
+      .prop('class', 'message_link_preview');
+  $("#" + message_id).append(div_block);
+  fill_preview_block(<%= @data.html_safe %>, message_id);
+<% end %>

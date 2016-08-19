@@ -8,6 +8,22 @@ module MessageHelper
     end
   end
 
+  def unread_message_class(unread_messages)
+    css_class = if unread_messages_exist?(unread_messages)
+                  'unread_message'
+                end
+  end
+
+  def read_unread_messages(unread_messages)
+    if unread_messages_exist?(unread_messages)
+      unread_messages.read_all
+    end
+  end
+
+  def unread_messages_exist?(unread_messages)
+    unread_messages.present? && unread_messages.last.sender != current_user
+  end
+
   def message_time(datetime)
     local_time = datetime.localtime
     if local_time < DateTime.now.to_date

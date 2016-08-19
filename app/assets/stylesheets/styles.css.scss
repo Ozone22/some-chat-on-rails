@@ -246,6 +246,28 @@ input {
     }
   }
 }
+.unread_message {
+  background-color: #eaeaea;
+}
+.link_preview, .message_link_preview {
+  background-color: #eaeaea;
+  padding: 10px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  max-height: 180px;
+  display: none;
+  img {
+    width: 120px;
+  }
+  span, a {
+    display: block;
+  }
+}
+
+.message_link_preview span {
+  font-size: 0.9em;
+}
+
 .users, .conversations {
   list-style: none;
   margin: 0;

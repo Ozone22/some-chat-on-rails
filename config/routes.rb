@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   get '/help' => 'static_pages#help'
   get '/about' => 'static_pages#about'
+  post '/htmlparse' => 'base_chat#html_parse'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

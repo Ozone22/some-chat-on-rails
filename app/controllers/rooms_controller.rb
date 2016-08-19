@@ -8,6 +8,7 @@ class RoomsController < BaseChatController
   def show
     @room = Room.find_by(id: params[:id])
     @messages = @room.messages.order(created_at: :asc)
+    read_unread_messages(@messages.unread_messages)
   end
 
   def destroy

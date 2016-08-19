@@ -6,4 +6,13 @@ class Message < ActiveRecord::Base
   delegate :show_avatar, to: :sender, prefix: true
 
   validates :text, :dialog_id, :dialog_type, :sender_id, presence: true
+
+  scope :unread_messages, -> do
+    where(is_readed: false)
+  end
+
+  scope :read_all, -> do
+    update_all(is_readed: true)
+  end
+
 end

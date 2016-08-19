@@ -1,4 +1,4 @@
-<li>
+<li class="<%= unread_message_class(conversation.unread_messages) %>">
   <div class ="row">
     <div class="col-md-2">
       <%= image_tag(conversation.recipient_show_avatar(:thumb)) %>
