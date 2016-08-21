@@ -8,6 +8,7 @@ Chat (not finished yet) on Rails.
 * Email confirmation
 * Forgot password(like email confirmation)
 * Link preview (facebook, vk like - using Ajax, WebSocket and Nokogiri)
+* Unread Messages ( and unread message count )
 * Using CDN for images(cloudinary)
 * WebSocket for conversations and rooms(private_pub - Faye)
 * Code covered with tests (Rspec, FactoryGirl)
@@ -20,7 +21,7 @@ Chat (not finished yet) on Rails.
 
 <img src="http://res.cloudinary.com/djfhtqjzs/image/upload/v1469269886/ER_ny0gww.png">
 
-Project not finished ( Online users and unread messages)
+Project not finished ( Online users )
 
 Project on Heroku: https://some-chat-on-rails.herokuapp.com
 
