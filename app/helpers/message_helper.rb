@@ -24,9 +24,15 @@ module MessageHelper
     unread_messages.present? && unread_messages.last.sender != current_user
   end
 
+  def unread_message_count
+    conversation_messages = Message.conversation_unread_messages_by(current_user.id)
+    room_messages = Message.room_unread_messages_by(current_user.id)
+    conversation_messages.length + room_messages.length
+  end
+
   def get_messages_by_params(messages)
     if params[:m]
-      messages
+      messages.order(created_at: :asc)
     elsif params[:search].present?
       messages.search(params[:search]).order(created_at: :asc )
     else

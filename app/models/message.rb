@@ -11,6 +11,18 @@ class Message < ActiveRecord::Base
     where(is_readed: false)
   end
 
+  scope :conversation_unread_messages_by, -> (recipient_id) do
+    joins('INNER JOIN conversations ON messages.dialog_id = conversations.id').
+      where.not(sender_id: recipient_id).
+        where('is_readed = false AND (conversations.sender_id=? OR recipient_id=?)', recipient_id, recipient_id)
+  end
+
+  scope :room_unread_messages_by, -> (recipient_id) do
+    joins('INNER JOIN room_users ON messages.dialog_id = room_users.room_id').
+      where.not(sender_id: recipient_id).
+        where(is_readed: false, room_users: { user_id: recipient_id })
+  end
+
   scope :read_all, -> do
     update_all(is_readed: true)
   end
