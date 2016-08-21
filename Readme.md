@@ -7,7 +7,7 @@ Chat (not finished yet) on Rails.
 * Registration(without any gems, like Devise)
 * Email confirmation
 * Forgot password(like email confirmation)
-* Link preview (facebook, vk like - using Ajax and Nokogiri)
+* Link preview (facebook, vk like - using Ajax, WebSocket and Nokogiri)
 * Using CDN for images(cloudinary)
 * WebSocket for conversations and rooms(private_pub - Faye)
 * Code covered with tests (Rspec, FactoryGirl)
