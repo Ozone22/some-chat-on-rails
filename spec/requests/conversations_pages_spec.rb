@@ -85,7 +85,7 @@ describe 'Conversation pages' do
           click_button 'Send'
         end
 
-        it { should have_content('How are you') }
+        it { should have_content('How are') }
       end
     end
   end

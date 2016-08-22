@@ -1,12 +1,14 @@
 <div class="row">
   <div class="search-input">
-    <%= form_tag socket_message_route(@messages.last), :method => 'get' do %>
-      <div class="col-md-10">
-        <%= text_field_tag :search, params[:search], class: "form-control" %>
-      </div>
-      <div class="col-md-2">
-        <%= submit_tag "Search", class: "btn btn-info" %>
-      </div>
+    <% if @messages.present? %>
+      <%= form_tag socket_message_route(@messages.last), :method => 'get' do %>
+        <div class="col-md-10">
+          <%= text_field_tag :search, params[:search], class: "form-control" %>
+        </div>
+        <div class="col-md-2">
+          <%= submit_tag "Search", class: "btn btn-info" %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>
