@@ -169,10 +169,8 @@ input {
     }
   }
   .user_show_avatars {
-    width: 95%;
     display: block;
     margin-top: 5%;
-    padding-left: 5%;
     img {
       width: 49%;
       margin-bottom: 5px;
@@ -262,6 +260,10 @@ input {
   span, a {
     display: block;
   }
+}
+
+.online {
+  color: lightslategrey;
 }
 
 .message_link_preview span {

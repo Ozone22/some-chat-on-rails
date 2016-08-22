@@ -23,6 +23,10 @@ gem 'js-routes'
 # For HTML page parsing
 gem 'nokogiri'
 
+# Redis server for Rails
+gem 'redis'
+gem 'hiredis'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

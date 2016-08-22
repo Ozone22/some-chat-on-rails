@@ -59,4 +59,11 @@ module SessionsHelper
     redirect_to current_user if signed_in?
   end
 
+  # Set online, with expiration time - 10 minutes
+  def set_online
+    if current_user.present?
+      $redis_onlines.set(current_user.id, nil, ex: 10 * 60 )
+    end
+  end
+
 end

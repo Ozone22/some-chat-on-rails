@@ -4,7 +4,14 @@
   <div class="col-md-3">
     <div class="navbar navbar-default navbar-fixed-left">
       <%= image_tag(@user.show_avatar(:original), alt: @user.login) %>
-      <span class="user_login_show"><%= @user.login %></span>
+      <span class="user_login_show">
+        <%= @user.login %>
+      </span>
+      <% if @user.online? %>
+        <span class="online">
+          online
+        </span>
+      <% end %>
       <%= render 'user_conversation_block' %>
       <%= render 'user_friends_block' %>
     </div>

@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def online?
+    $redis_onlines.exists(self.id)
+  end
+
   # We update just few fields(without pass)
   def send_password_reset
     self.password_reset_token = User.encrypt(User.new_token)
