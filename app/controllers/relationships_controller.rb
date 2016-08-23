@@ -4,14 +4,14 @@ class RelationshipsController < ApplicationController
 
   def create
     user = User.find_by(id: params[:relationship][:friend_id])
-    current_user.friends_with!(user)
+    current_user.friends_with(user)
     flash[:success] = 'Request for friendship sended'
     redirect_to :back
   end
 
   def destroy
     user = Relationship.find_by(id: params[:id]).friend
-    current_user.breakup_with!(user)
+    current_user.breakup_with(user)
     flash[:success] = 'User removed from friends'
     redirect_to :back
   end
