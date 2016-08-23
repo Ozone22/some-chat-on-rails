@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   end
 
   def online?
-    $redis_onlines.exists(self.id)
+    REDIS.exists(self.id)
   end
 
   # We update just few fields(without pass)
