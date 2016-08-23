@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
     relationships.exists?(friend_id: friend.id)
   end
 
-  def friends_with!(friend)
+  def friends_with(friend)
     unless self == friend || relationships.exists?(friend_id: friend.id)
       transaction do
         relationships.create!(friend: friend, status: :pending)
@@ -125,7 +125,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def breakup_with!(friend)
+  def breakup_with(friend)
     transaction do
       relationships.find_by(friend_id: friend.id).destroy!
       inverted_relationships.find_by(user_id: friend.id).destroy!
