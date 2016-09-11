@@ -11,7 +11,7 @@ class RelationshipsController < ApplicationController
 
   def destroy
     user = Relationship.find_by(id: params[:id]).friend
-    current_user.breakup_with!(user)
+    current_user.breakup_with(user)
     flash[:success] = 'User removed from friends'
     redirect_to :back
   end
