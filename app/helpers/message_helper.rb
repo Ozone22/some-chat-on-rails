@@ -40,6 +40,10 @@ module MessageHelper
     end
   end
 
+  def js_message_text(text)
+    text.to_json
+  end
+
   def message_time(datetime)
     local_time = datetime.localtime
     if local_time < DateTime.now.to_date

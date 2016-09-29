@@ -10,6 +10,7 @@ function fill_preview_block(data, id) {
 }
 
 function render_preview(message, message_id) {
+  message = message.replace(/&quot;/g, " ");
   $(document).ready(function (e) {
     if (message.indexOf("http") !== -1) {
       // get Rails route
@@ -22,6 +23,7 @@ function render_preview(message, message_id) {
         }
       });
     } else {
+      console.log(message);
       $("#" + message_id + "message").text(message);
     }
   });

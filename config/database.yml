@@ -8,8 +8,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: willfarm
-  password: 17d3199f
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
 
 development:
   <<: *default
@@ -27,6 +27,6 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: dmojlnl9dqcag
-  username: jxhvuboyxgmtdb
-  password: N7g8OUIB87eNa0BAbDkvQtE8aA
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
