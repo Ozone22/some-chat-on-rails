@@ -5,11 +5,15 @@
 
     <%= form_tag(sessions_path, method: :post) do %>
 
-        <%= label_tag(:email, "Email") %>
-        <%= text_field_tag(:email) %>
+        <div class="form-group">
+          <%= label_tag(:email, "Email") %>
+          <%= text_field_tag(:email, nil, class: 'form-control') %>
+        </div>
 
-        <%= label_tag(:password, "Password") %>
-        <%= password_field_tag(:password) %>
+        <div class="form-group">
+          <%= label_tag(:password, "Password") %>
+          <%= password_field_tag(:password, nil, class: 'form-control') %>
+        </div>
 
         <%= submit_tag("Sign in", class: "btn btn-large btn-primary") %>
 

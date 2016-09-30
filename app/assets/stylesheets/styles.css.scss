@@ -139,12 +139,11 @@ input {
 }
 
 .friend_type_panel {
-  padding: 2%;
-  padding-bottom: 4%;
+  border: 1px solid $btn-default-border;
+  font-size: 1.1em;
   width: 95%;
   margin-left: 5%;
   margin-bottom: 2%;
-  background-color: #d5e8ff;
   a {
     color: #555;
   }

@@ -6,10 +6,12 @@
 
     <%= form_tag(reset_password_index_path, method: :post) do %>
 
-        <%= label_tag(:email, "Email") %>
-        <%= text_field_tag(:email) %>
+        <div class="form-group">
+          <%= label_tag(:email, 'Email') %>
+          <%= text_field_tag(:email, nil, class: 'form-control') %>
+        </div>
 
-        <%= submit_tag("Reset password", class: "btn btn-large btn-primary") %>
+        <%= submit_tag('Reset password', class: 'btn btn-large btn-primary') %>
 
     <% end %>
 
