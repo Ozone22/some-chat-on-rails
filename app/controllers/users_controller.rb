@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 20)
+    @users = User.paginate(page: params[:page], per_page: 10)
   end
 
   def create
@@ -61,6 +61,9 @@ class UsersController < ApplicationController
 
   def friends
     @users = user_friends_by_status(params[:status] || 'accepted')
+    if params[:status] == 'pending'
+      @show_accept_block = true
+    end
   end
 
   def destroy
@@ -74,19 +77,6 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:login, :email, :password, :password_confirmation, :avatar)
   end
-
-  def user_friends_by_status(status)
-    user_list = User.find_by(id: params[:id])
-    if status == 'requested'
-      user_list.requested_friends.all
-    elsif status == 'pending'
-      user_list.pending_friends.all
-    else
-      user_list.friends.all
-    end
-  end
-
-  # Before filter
 
   def admin_user
     redirect_to current_user unless current_user.admin?

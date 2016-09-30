@@ -8,10 +8,20 @@ module MessageHelper
     end
   end
 
+  # def fetch_messages(conversation_id, conversation_type, message_collection)
+  #   key = "#{ conversation_type }#{conversation_id}"
+  #   messages = REDIS.get(key)
+  #   if messages.nil?
+  #     messages = get_messages_by_params(message_collection)
+  #     REDIS.set(key, messages.map { |message| message.to_json } )
+  #   end
+  #   @messages = JSON.parse(messages).map { |json_message| Message.new.from_json(json_message) }
+  # end
+
   def unread_message_class(unread_messages)
-    css_class = if unread_messages_exist?(unread_messages)
-                  'unread_message'
-                end
+    if unread_messages_exist?(unread_messages)
+      'unread_message'
+    end
   end
 
   def read_unread_messages(unread_messages)

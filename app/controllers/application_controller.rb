@@ -7,5 +7,6 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
   include MessageHelper
+  include UsersHelper
 
 end
