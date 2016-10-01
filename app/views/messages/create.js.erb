@@ -1,4 +1,5 @@
-<% PrivatePub.publish_to(socket_message_route(@message),
-              { message: @message, message_eval: "#{ render(@message) }" }) %>
+<% publish_to socket_message_route(@message) do %>
+  $(".messages").append("<%= j render(@message) %>");
+<% end %>
 $("#message_text").val('');
 $("#link_preview").css('display','none');

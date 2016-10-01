@@ -1,5 +1,4 @@
 <% provide(:title, 'Messages') %>
-<%= subscribe_to conversation_path(@conversation) %>
 
 <div class = "row">
   <%= render 'users/user_sidebar' %>
@@ -35,4 +34,4 @@
   </div>
 </div>
 
-<script>subscribing("<%= conversation_path(@conversation) %>", <%= current_user.id %>)</script>
+<%= subscribe_to conversation_path(@conversation) %>

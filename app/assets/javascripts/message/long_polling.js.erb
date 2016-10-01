@@ -1,9 +1,0 @@
-function subscribing(path, current_user_id) {
-  PrivatePub.subscribe(path, function (data, channel) {
-    if (typeof data != 'undefined') {
-      $('.messages').append("" + data.message_eval);
-      if (data.message.sender_id != current_user_id)
-        alert('New messages!');
-    }
-  });
-}
