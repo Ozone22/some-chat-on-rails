@@ -4,11 +4,7 @@
       <ul class="nav navbar-nav">
         <li><%= link_to 'Settings', edit_user_path(current_user) %></li>
         <li><%= link_to 'Friends',  friends_user_path(current_user) %></li>
-        <% if unread_message_count > 0 %>
-          <li><%= link_to "Messages + #{ unread_message_count }", conversations_path %></li>
-        <% else %>
-          <li><%= link_to 'Messages', conversations_path %></li>
-        <% end %>
+        <li><%= link_to "Messages #{ print_unread_message_count }", conversations_path, id: 'messages_link' %></li>
       </ul>
     <% else %>
       <%= link_to 'Sign in now', signin_path %>

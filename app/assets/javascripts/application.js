@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require private_pub
+//= require message/long_polling.js.erb
 //= require bootstrap.file-input
 //= require bootstrap/modal
 //= require js-routes

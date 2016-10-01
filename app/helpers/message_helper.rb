@@ -40,6 +40,10 @@ module MessageHelper
     conversation_messages.length + room_messages.length
   end
 
+  def print_unread_message_count
+    unread_message_count > 0 ? "+ #{ unread_message_count }" : ''
+  end
+
   def get_messages_by_params(messages)
     if params[:m]
       messages.order(created_at: :asc)
